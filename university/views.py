@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UniversitySerializer
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.generics import DestroyAPIView
 
 
 def home(request):
@@ -53,7 +54,8 @@ class UniversityFilterView(APIView):
         university_name = request.data.get(
             "university_name", None
         )  # Get the selected university_name
-
+        min_tuition = request.data.get("min_tuition", None)  # Minimum tuition fee
+        max_tuition = request.data.get("max_tuition", None)  # Maximum tuition fee
         # Apply filtering
         universities = University.objects.all()
         # if search_value:
@@ -66,7 +68,14 @@ class UniversityFilterView(APIView):
             universities = universities.filter(
                 university_name__icontains=university_name
             )
-
+        if min_tuition and max_tuition:
+            universities = universities.filter(
+                tuition_fees__gte=min_tuition, tuition_fees__lte=max_tuition
+            )
+        elif min_tuition:
+            universities = universities.filter(tuition_fees__gte=min_tuition)
+        elif max_tuition:
+            universities = universities.filter(tuition_fees__lte=max_tuition)
         # Apply pagination
         paginator = PageNumberPagination()
         paginator.page_size = length
@@ -130,3 +139,19 @@ class UniversityDeleteView(DeleteView):
     model = University
     template_name = "university/confirm_delete.html"
     success_url = reverse_lazy("university:list")
+
+
+class UniversityDeleteApiView(DestroyAPIView):
+    queryset = University.objects.all()
+    serializer_class = UniversitySerializer
+    lookup_field = (
+        "pk"  # This makes it use 'pk' as the identifier to find the object to delete.
+    )
+
+    def destroy(self, request, *args, **kwargs):
+        # Call the parent class's destroy method to delete the object
+        response = super().destroy(request, *args, **kwargs)
+        # Optionally, add a custom response
+        return Response(
+            {"message": "University successfully deleted."}, status=status.HTTP_200_OK
+        )

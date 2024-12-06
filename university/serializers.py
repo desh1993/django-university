@@ -18,12 +18,13 @@ class UniversitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = University
-        fields = [
-            "id",
-            "university_name",
-            "state",
-            "tuition_fees",
-            "program_level",
-            "program_level_full",
-            "course_title",
-        ]
+        fields = "__all__"
+        # fields = [
+        #     "id",
+        #     "university_name",
+        #     "state",
+        #     "tuition_fees",
+        #     "program_level",
+        #     "program_level_full",
+        #     "course_title",
+        # ]

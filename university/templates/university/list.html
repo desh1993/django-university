@@ -43,6 +43,13 @@
           aria-label="state"
         />
       </div>
+      <div class="col-md-12">
+        <label for="programfees" class="form-label fw-bold"
+          >Filter by Program Fees:</label
+        >
+        <input type="text" class="js-range-slider" name="my_range" value="" />
+      </div>
+
       <div class="col-md-4 d-flex align-items-end">
         <button type="button" id="applyFilters" class="btn btn-primary w-100">
           Apply Filters
@@ -60,22 +67,17 @@
       <th>State</th>
       <th>Tuition Fees</th>
       <th>Course Title</th>
+      <th>Actions</th>
     </tr>
   </thead>
 </table>
 {% endblock %} {% block extra_js %}
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <script>
   $(document).ready(function () {
-    function getCSRFToken() {
-      let csrfToken = null;
-      document.cookie.split(";").forEach(function (cookie) {
-        if (cookie.trim().startsWith("csrftoken=")) {
-          csrfToken = cookie.trim().substring("csrftoken=".length);
-        }
-      });
-      return csrfToken;
-    }
     const table = $("#university-table").DataTable({
+      responsive: true,
       searching: false,
       processing: true, // Show a loading indicator
       serverSide: true, // Enable server-side processing
@@ -87,9 +89,17 @@
         },
         contentType: "application/json", // Send JSON data
         data: function (d) {
+          let min_tuition = null,
+            max_tuition = null;
           const programLevel = $("#programLevelFilter").val();
           const state = $("#stateFilter").val();
           const universityFilter = $("#universityFilter").val();
+          let my_range = $(".js-range-slider").data("ionRangeSlider");
+          if (my_range) {
+            const { from, to } = my_range.result;
+            min_tuition = from;
+            max_tuition = to;
+          }
           let data = {
             draw: d.draw, // Draw counter
             start: d.start, // Start index
@@ -98,23 +108,12 @@
             program_level: programLevel || null, // Include program level filter
             state: state || null, // Include program level filter
             university_name: universityFilter || null, // Include university name filter filter
+            min_tuition,
+            max_tuition,
             order: d.order, // Sorting info
             columns: d.columns, // Column information
           };
           return JSON.stringify(data);
-
-          /*
-          const programLevel = $("#programLevelFilter").val();
-
-          return JSON.stringify({
-            draw: d.draw, // Draw counter
-            start: d.start, // Start index
-            length: d.length, // Number of rows per page
-            search: d.search.value, // Search term
-            program_level: programLevel || null, // Include program level filter
-            order: d.order, // Sorting info
-            columns: d.columns, // Column information
-          });*/
         },
         dataSrc: function (json) {
           return json.data; // Extract data for rendering
@@ -126,6 +125,24 @@
         { data: "state", title: "State" },
         { data: "tuition_fees", title: "Tuition Fees" },
         { data: "course_title", title: "Course Title" },
+        {
+          data: null,
+          title: "Actions",
+          render: function (data, type, row) {
+            // Add buttons to each row
+            const editButton = `<a href="/university/${row.id}" class="btn btn-primary btn-sm w-100">Edit</a>`;
+            const deleteButton = `<button class="btn btn-danger btn-sm w-100" onclick="deleteUniversity(${row.id})">Delete</button>`;
+            return `<div class="d-flex flex-column flex-md-row justify-content-between">
+                <div class="mb-2 mb-md-0 w-100 p-1">
+                  ${editButton}
+                </div>
+                <div class="w-100 p-1">
+                  ${deleteButton}
+                </div>
+              </div>
+              `;
+          },
+        },
       ],
       pageLength: 10, // Number of records per page
       lengthMenu: [10, 25, 50, 75, 100], // Options for page length
@@ -134,6 +151,66 @@
     $("#applyFilters").on("click", function () {
       table.ajax.reload(); // Reload the table with the updated filter
     });
+
+    $(".js-range-slider").ionRangeSlider({
+      type: "double",
+      min: 10000,
+      max: 50000,
+      from: 200,
+      to: 50000,
+      grid: true,
+    });
   });
+  function getCSRFToken() {
+    let csrfToken = null;
+    document.cookie.split(";").forEach(function (cookie) {
+      if (cookie.trim().startsWith("csrftoken=")) {
+        csrfToken = cookie.trim().substring("csrftoken=".length);
+      }
+    });
+    return csrfToken;
+  }
+
+  function deleteUniversity(id) {
+    // Using SweetAlert2 for confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform delete action (e.g., send an API request to delete)
+        console.log(`Deleting university with ID: ${id}`);
+
+        // Example: Call an API endpoint to delete the university
+        $.ajax({
+          url: `/university/api/universities/${id}/`,
+          type: "DELETE",
+          headers: {
+            "X-CSRFToken": getCSRFToken(), // Add CSRF token for security
+          },
+          success: function (response) {
+            Swal.fire(
+              "Deleted!",
+              "The university has been deleted.",
+              "success"
+            );
+            // Reload the table data after deletion
+            $("#university-table").DataTable().ajax.reload();
+          },
+          error: function (error) {
+            Swal.fire("Error!", "Failed to delete the university.", "error");
+            console.error(error);
+          },
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire("Cancelled", "The university was not deleted.", "info");
+      }
+    });
+  }
 </script>
 {% endblock %}
