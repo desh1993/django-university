@@ -1,0 +1,222 @@
+[
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University A",
+      "state": "State A",
+      "tuition_fees": 10000,
+      "program_level": "B",
+      "course_title": "Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University B",
+      "state": "State B",
+      "tuition_fees": 12000,
+      "program_level": "M",
+      "course_title": "Mathematics"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University C",
+      "state": "State C",
+      "tuition_fees": 15000,
+      "program_level": "P",
+      "course_title": "Physics"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University D",
+      "state": "State D",
+      "tuition_fees": 11000,
+      "program_level": "B",
+      "course_title": "Computer Science"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University E",
+      "state": "State E",
+      "tuition_fees": 13000,
+      "program_level": "M",
+      "course_title": "Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University F",
+      "state": "State F",
+      "tuition_fees": 14500,
+      "program_level": "P",
+      "course_title": "Biology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University G",
+      "state": "State G",
+      "tuition_fees": 16000,
+      "program_level": "B",
+      "course_title": "Psychology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University H",
+      "state": "State H",
+      "tuition_fees": 11000,
+      "program_level": "M",
+      "course_title": "Physics"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University I",
+      "state": "State I",
+      "tuition_fees": 13500,
+      "program_level": "P",
+      "course_title": "Chemistry"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University J",
+      "state": "State J",
+      "tuition_fees": 12500,
+      "program_level": "B",
+      "course_title": "Business Administration"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University K",
+      "state": "State K",
+      "tuition_fees": 14000,
+      "program_level": "M",
+      "course_title": "Law"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University L",
+      "state": "State L",
+      "tuition_fees": 15500,
+      "program_level": "P",
+      "course_title": "Philosophy"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University M",
+      "state": "State M",
+      "tuition_fees": 12000,
+      "program_level": "B",
+      "course_title": "Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University N",
+      "state": "State N",
+      "tuition_fees": 12500,
+      "program_level": "M",
+      "course_title": "Mathematics"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University O",
+      "state": "State O",
+      "tuition_fees": 14500,
+      "program_level": "P",
+      "course_title": "Political Science"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University P",
+      "state": "State P",
+      "tuition_fees": 13500,
+      "program_level": "B",
+      "course_title": "Sociology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University Q",
+      "state": "State Q",
+      "tuition_fees": 12000,
+      "program_level": "M",
+      "course_title": "Economics"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University R",
+      "state": "State R",
+      "tuition_fees": 13000,
+      "program_level": "P",
+      "course_title": "History"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University S",
+      "state": "State S",
+      "tuition_fees": 12500,
+      "program_level": "B",
+      "course_title": "Computer Science"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University T",
+      "state": "State T",
+      "tuition_fees": 14500,
+      "program_level": "M",
+      "course_title": "Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University U",
+      "state": "State U",
+      "tuition_fees": 12000,
+      "program_level": "P",
+      "course_title": "Medicine"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University V",
+      "state": "State V",
+      "tuition_fees": 11000,
+      "program_level": "B",
+      "course_title": "Law"
+    }
+  }
+]

@@ -1,0 +1,87 @@
+{% extends "university/base.html" %} {% block title %} University List
+{%endblock %} {%block content %}
+<h1>University List</h1>
+<div class="container my-3">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="programLevelFilter" class="form-label fw-bold"
+        >Filter by Program Level</label
+      >
+      <select id="programLevelFilter" class="form-select">
+        <option value="">All Levels</option>
+        <option value="D">Diploma</option>
+        <option value="B">Bachelor</option>
+        <option value="M">Master</option>
+        <option value="P">PhD</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<table id="university-table" class="display" style="width: 100%">
+  <thead>
+    <tr>
+      <th>University Name</th>
+      <th>Program Level</th>
+      <th>State</th>
+      <th>Tuition Fees</th>
+      <th>Course Title</th>
+    </tr>
+  </thead>
+</table>
+{% endblock %} {% block extra_js %}
+<script>
+  $(document).ready(function () {
+    function getCSRFToken() {
+      let csrfToken = null;
+      document.cookie.split(";").forEach(function (cookie) {
+        if (cookie.trim().startsWith("csrftoken=")) {
+          csrfToken = cookie.trim().substring("csrftoken=".length);
+        }
+      });
+      return csrfToken;
+    }
+
+    const table = $("#university-table").DataTable({
+      processing: true, // Show a loading indicator
+      serverSide: true, // Enable server-side processing
+      ajax: {
+        url: "/university/api/universities/", // API URL
+        type: "POST", // Use POST instead of GET
+        headers: {
+          "X-CSRFToken": getCSRFToken(), // Add CSRF token in the request header
+        },
+        contentType: "application/json", // Send JSON data
+        data: function (d) {
+          const programLevel = $("#programLevelFilter").val();
+          return JSON.stringify({
+            draw: d.draw, // Draw counter
+            start: d.start, // Start index
+            length: d.length, // Number of rows per page
+            search: d.search.value, // Search term
+            program_level: programLevel || null, // Include program level filter
+            order: d.order, // Sorting info
+            columns: d.columns, // Column information
+          });
+        },
+        dataSrc: function (json) {
+          return json.data; // Extract data for rendering
+        },
+      },
+      columns: [
+        { data: "university_name", title: "University Name" },
+        { data: "program_level_full", title: "Program Level" },
+        { data: "state", title: "State" },
+        { data: "tuition_fees", title: "Tuition Fees" },
+        { data: "course_title", title: "Course Title" },
+      ],
+      pageLength: 10, // Number of records per page
+      lengthMenu: [10, 25, 50, 75, 100], // Options for page length
+    });
+
+    $("#programLevelFilter").on("change", function () {
+      table.ajax.reload(); // Reload the table with the updated filter
+    });
+  });
+</script>
+{% endblock %}
