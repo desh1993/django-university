@@ -45,17 +45,27 @@ class UniversityFilterView(APIView):
         draw = request.data.get("draw", 1)
         start = int(request.data.get("start", 0))
         length = int(request.data.get("length", 10))
-        search_value = request.data.get("search", "")
+        # search_value = request.data.get("search", "")
         program_level = request.data.get(
             "program_level", None
         )  # Get the selected program_level
+        state = request.data.get("state", None)  # Get the selected program_level
+        university_name = request.data.get(
+            "university_name", None
+        )  # Get the selected university_name
 
         # Apply filtering
         universities = University.objects.all()
-        if search_value:
-            universities = universities.filter(university_name__icontains=search_value)
+        # if search_value:
+        #     universities = universities.filter(university_name__icontains=search_value)
         if program_level:
             universities = universities.filter(program_level=program_level)
+        if state:
+            universities = universities.filter(state=state)
+        if university_name:
+            universities = universities.filter(
+                university_name__icontains=university_name
+            )
 
         # Apply pagination
         paginator = PageNumberPagination()

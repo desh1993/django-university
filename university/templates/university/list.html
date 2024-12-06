@@ -1,20 +1,54 @@
 {% extends "university/base.html" %} {% block title %} University List
 {%endblock %} {%block content %}
+
 <h1>University List</h1>
 <div class="container my-3">
-  <div class="row">
-    <div class="col-md-4">
-      <label for="programLevelFilter" class="form-label fw-bold"
-        >Filter by Program Level</label
-      >
-      <select id="programLevelFilter" class="form-select">
-        <option value="">All Levels</option>
-        <option value="D">Diploma</option>
-        <option value="B">Bachelor</option>
-        <option value="M">Master</option>
-        <option value="P">PhD</option>
-      </select>
-    </div>
+  <div class="row filter-section">
+    <form id="filter-form" class="row g-3">
+      <div class="col-md-12">
+        <label for="programLevelFilter" class="form-label fw-bold"
+          >Filter by Program Level</label
+        >
+        <select id="programLevelFilter" name="programLevel" class="form-select">
+          <option value="">All Levels</option>
+          <option value="D">Diploma</option>
+          <option value="B">Bachelor</option>
+          <option value="M">Master</option>
+          <option value="P">PhD</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <label for="stateFilter" class="form-label fw-bold"
+          >Filter by State</label
+        >
+        <input
+          type="text"
+          id="stateFilter"
+          name="state"
+          class="form-control"
+          placeholder="Search By State"
+          aria-label="state"
+        />
+      </div>
+      <div class="col-md-12">
+        <label for="universityFilter" class="form-label fw-bold"
+          >Filter By University Name</label
+        >
+        <input
+          type="text"
+          id="universityFilter"
+          name="university_name"
+          class="form-control"
+          placeholder="Search By University"
+          aria-label="state"
+        />
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="button" id="applyFilters" class="btn btn-primary w-100">
+          Apply Filters
+        </button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -41,8 +75,8 @@
       });
       return csrfToken;
     }
-
     const table = $("#university-table").DataTable({
+      searching: false,
       processing: true, // Show a loading indicator
       serverSide: true, // Enable server-side processing
       ajax: {
@@ -54,6 +88,24 @@
         contentType: "application/json", // Send JSON data
         data: function (d) {
           const programLevel = $("#programLevelFilter").val();
+          const state = $("#stateFilter").val();
+          const universityFilter = $("#universityFilter").val();
+          let data = {
+            draw: d.draw, // Draw counter
+            start: d.start, // Start index
+            length: d.length, // Number of rows per page
+            search: d.search.value, // Search term
+            program_level: programLevel || null, // Include program level filter
+            state: state || null, // Include program level filter
+            university_name: universityFilter || null, // Include university name filter filter
+            order: d.order, // Sorting info
+            columns: d.columns, // Column information
+          };
+          return JSON.stringify(data);
+
+          /*
+          const programLevel = $("#programLevelFilter").val();
+
           return JSON.stringify({
             draw: d.draw, // Draw counter
             start: d.start, // Start index
@@ -62,7 +114,7 @@
             program_level: programLevel || null, // Include program level filter
             order: d.order, // Sorting info
             columns: d.columns, // Column information
-          });
+          });*/
         },
         dataSrc: function (json) {
           return json.data; // Extract data for rendering
@@ -79,7 +131,7 @@
       lengthMenu: [10, 25, 50, 75, 100], // Options for page length
     });
 
-    $("#programLevelFilter").on("change", function () {
+    $("#applyFilters").on("click", function () {
       table.ajax.reload(); // Reload the table with the updated filter
     });
   });
