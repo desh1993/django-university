@@ -105,13 +105,66 @@ class UniversitySerializer(serializers.ModelSerializer):
             )
         return value
 
-    # Ensure course_title is a string
-    # def validate_course_title(self, value):
-    #     if isinstance(value, (int, float)):  # Check if it's a number
-    #         raise serializers.ValidationError(
-    #             "Course title must be a string, not a number."
-    #         )
-    #     if not isinstance(value, str):  # If it's not a string, raise a validation error
-    #         print("here")
-    #         raise serializers.ValidationError("Course title must be a string.")
-    #     return value
+
+class UniversityUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = University
+        fields = "__all__"
+
+    def validate_university_name(self, value):
+        """
+        Validate that the university_name is unique unless it's the current instance being updated.
+        """
+        instance = self.instance  # Current university instance being updated
+        print(value)
+        # Check if university_name already exists for a different record
+        if (
+            University.objects.filter(university_name=value)
+            .exclude(id=instance.id)
+            .exists()
+        ):
+            raise serializers.ValidationError(
+                "A university with this name already exists."
+            )
+        return value
+
+    def validate_program_level(self, value):
+        allowed_levels = ["D", "B", "M", "P"]
+        if value not in allowed_levels:
+            raise serializers.ValidationError(
+                f"Program level must be one of {', '.join(allowed_levels)}."
+            )
+        return value
+
+    def validate_tuition_fees(self, value):
+        max_tuiton_fees = 950000
+        min_tuition_fees = 0
+        try:
+            value = float(value)  # Convert to float
+        except ValueError:
+            raise serializers.ValidationError("Tuition fees must be a valid number.")
+
+        if not isinstance(value, (float, int)):  # Ensure it's a valid number type
+            raise serializers.ValidationError("Tuition fees must be a valid number.")
+
+        if value > max_tuiton_fees:  # Check if it exceeds the maximum limit
+            raise serializers.ValidationError(
+                f"Tuition fees must be less than {max_tuiton_fees}."
+            )
+
+        if value <= min_tuition_fees:  # Ensure it's a positive number
+            raise serializers.ValidationError(
+                f"Tuition fees must be greater than {min_tuition_fees}."
+            )
+
+        return value
+
+    def validate_course_title(self, value):
+        """
+        Ensure the course title is at least 5 characters long.
+        """
+        if len(value) < 5:
+            raise serializers.ValidationError(
+                "The course title must be at least 5 characters long."
+            )
+        return value

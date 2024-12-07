@@ -12,9 +12,10 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UniversitySerializer
+from .serializers import UniversitySerializer, UniversityUpdateSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import DestroyAPIView
+from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -131,6 +132,46 @@ class UniversityCreateApiView(APIView):
                 "data": serializer.data,
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UniversityUpdateApiView(APIView):
+    def put(self, request, pk):
+        # Fetch the instance by its primary key (pk)
+        university = get_object_or_404(University, pk=pk)
+
+        # Deserialize the data and update the instance
+        serializer = UniversityUpdateSerializer(
+            university, data=request.data, partial=False
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            response_data = {
+                "status": "Updated success",
+                "data": serializer.data,
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk):
+        # Fetch the instance by its primary key (pk)
+        university = get_object_or_404(University, pk=pk)
+
+        # Partial update of the instance
+        serializer = UniversityUpdateSerializer(
+            university, data=request.data, partial=True
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            response_data = {
+                "status": "Patch success",
+                "data": serializer.data,
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

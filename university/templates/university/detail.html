@@ -1,1 +1,102 @@
-<h1>Detail List</h1>
+{% extends "university/base.html" %} {% load static %} {% block title %} Edit
+University {%endblock %} {%block content %}
+
+<div class="container mt-4">
+  <h1 class="mb-4">Edit University</h1>
+  <!-- Spinner -->
+  <div class="spinner-overlay" id="spinner-overlay">
+    <div class="spinner-border" role="status"></div>
+    <div id="spinner-message"></div>
+  </div>
+
+  <form id="update-university-form">
+    <input
+        type="hidden"
+        id="university_id"
+        name="university_id"
+        class="form-control"
+        value="{{university.id}}"
+      />
+    <div class="mb-3">
+      <label for="university_name" class="form-label">University Name</label>
+      <input
+        type="text"
+        id="university_name"
+        name="university_name"
+        class="form-control"
+        placeholder="Enter university name"
+        
+        value="{{object.university_name}}"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="state" class="form-label">State</label>
+      <input
+        type="text"
+        id="state"
+        name="state"
+        class="form-control"
+        placeholder="Enter state"
+        
+        value="{{object.state}}"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="tuition_fees" class="form-label">Tuition Fees</label>
+      <input
+        type="number"
+        id="tuition_fees"
+        class="form-control"
+        placeholder="Enter tuition fees"
+        name="tuition_fees"
+        
+        value="{{object.tuition_fees}}"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="program_level" class="form-label">Program Level</label>
+      <select
+      id="program_level"
+      name="program_level"
+      class="form-select"
+      required
+  >
+      <option value="" disabled {% if object.program_level is not defined or object.program_level == '' %}selected{% endif %}>Choose level</option>
+      <option value="D" {% if object.program_level == 'D' or object.program_level is not defined %}selected{% endif %}>Diploma</option>
+      <option value="B" {% if object.program_level == 'B' %}selected{% endif %}>Bachelor's</option>
+      <option value="M" {% if object.program_level == 'M' %}selected{% endif %}>Master's</option>
+      <option value="P" {% if object.program_level == 'P' %}selected{% endif %}>Ph.D.</option>
+  </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="course_title" class="form-label">Course Title</label>
+      <input
+        type="text"
+        id="course_title"
+        name="course_title"
+        class="form-control"
+        placeholder="Enter course title"
+        
+        value="{{ object.course_title }}"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-success" id="submit-btn">
+      Update
+    </button>
+  </form>
+</div>
+
+{% endblock %} {%block extra_js %}
+<!-- Include jQuery and the jQuery Validation Plugin -->
+
+<script
+  type="module"
+  src="{% static 'university/js/updateUniversity.js' %}"
+></script>
+
+{% endblock %}
