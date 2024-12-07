@@ -2,39 +2,9 @@
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University A",
-      "state": "State A",
-      "tuition_fees": 10000,
-      "program_level": "B",
-      "course_title": "Engineering"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University B",
-      "state": "State B",
-      "tuition_fees": 12000,
-      "program_level": "M",
-      "course_title": "Mathematics"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University C",
-      "state": "State C",
-      "tuition_fees": 15000,
-      "program_level": "P",
-      "course_title": "Physics"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University D",
-      "state": "State D",
-      "tuition_fees": 11000,
+      "university_name": "Harvard University",
+      "state": "Massachusetts",
+      "tuition_fees": 50000,
       "program_level": "B",
       "course_title": "Computer Science"
     }
@@ -42,99 +12,49 @@
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University E",
-      "state": "State E",
-      "tuition_fees": 13000,
+      "university_name": "Stanford University",
+      "state": "California",
+      "tuition_fees": 55000,
       "program_level": "M",
-      "course_title": "Engineering"
+      "course_title": "Electrical Engineering"
     }
   },
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University F",
-      "state": "State F",
-      "tuition_fees": 14500,
-      "program_level": "P",
-      "course_title": "Biology"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University G",
-      "state": "State G",
-      "tuition_fees": 16000,
+      "university_name": "University of California, Berkeley",
+      "state": "California",
+      "tuition_fees": 42000,
       "program_level": "B",
-      "course_title": "Psychology"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University H",
-      "state": "State H",
-      "tuition_fees": 11000,
-      "program_level": "M",
       "course_title": "Physics"
     }
   },
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University I",
-      "state": "State I",
-      "tuition_fees": 13500,
+      "university_name": "MIT",
+      "state": "Massachusetts",
+      "tuition_fees": 53000,
       "program_level": "P",
-      "course_title": "Chemistry"
+      "course_title": "Aerospace Engineering"
     }
   },
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University J",
-      "state": "State J",
-      "tuition_fees": 12500,
+      "university_name": "Yale University",
+      "state": "Connecticut",
+      "tuition_fees": 59000,
       "program_level": "B",
-      "course_title": "Business Administration"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University K",
-      "state": "State K",
-      "tuition_fees": 14000,
-      "program_level": "M",
-      "course_title": "Law"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University L",
-      "state": "State L",
-      "tuition_fees": 15500,
-      "program_level": "P",
       "course_title": "Philosophy"
     }
   },
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University M",
-      "state": "State M",
-      "tuition_fees": 12000,
-      "program_level": "B",
-      "course_title": "Engineering"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University N",
-      "state": "State N",
-      "tuition_fees": 12500,
+      "university_name": "Princeton University",
+      "state": "New Jersey",
+      "tuition_fees": 53000,
       "program_level": "M",
       "course_title": "Mathematics"
     }
@@ -142,39 +62,19 @@
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University O",
-      "state": "State O",
-      "tuition_fees": 14500,
-      "program_level": "P",
-      "course_title": "Political Science"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University P",
-      "state": "State P",
-      "tuition_fees": 13500,
+      "university_name": "Columbia University",
+      "state": "New York",
+      "tuition_fees": 62000,
       "program_level": "B",
-      "course_title": "Sociology"
+      "course_title": "Law"
     }
   },
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University Q",
-      "state": "State Q",
-      "tuition_fees": 12000,
-      "program_level": "M",
-      "course_title": "Economics"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University R",
-      "state": "State R",
-      "tuition_fees": 13000,
+      "university_name": "University of Oxford",
+      "state": "England",
+      "tuition_fees": 35000,
       "program_level": "P",
       "course_title": "History"
     }
@@ -182,9 +82,109 @@
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University S",
-      "state": "State S",
-      "tuition_fees": 12500,
+      "university_name": "University of Cambridge",
+      "state": "England",
+      "tuition_fees": 34000,
+      "program_level": "D",
+      "course_title": "Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Chicago",
+      "state": "Illinois",
+      "tuition_fees": 60000,
+      "program_level": "M",
+      "course_title": "Business Administration"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "California Institute of Technology",
+      "state": "California",
+      "tuition_fees": 70000,
+      "program_level": "B",
+      "course_title": "Chemistry"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Washington",
+      "state": "Washington",
+      "tuition_fees": 42000,
+      "program_level": "P",
+      "course_title": "Biology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of California, Los Angeles",
+      "state": "California",
+      "tuition_fees": 45000,
+      "program_level": "B",
+      "course_title": "Architecture"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "New York University",
+      "state": "New York",
+      "tuition_fees": 67000,
+      "program_level": "M",
+      "course_title": "Media Studies"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of California, San Diego",
+      "state": "California",
+      "tuition_fees": 44000,
+      "program_level": "B",
+      "course_title": "Psychology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Michigan",
+      "state": "Michigan",
+      "tuition_fees": 49000,
+      "program_level": "M",
+      "course_title": "Electrical Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Cornell University",
+      "state": "New York",
+      "tuition_fees": 62000,
+      "program_level": "P",
+      "course_title": "Veterinary Medicine"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Northwestern University",
+      "state": "Illinois",
+      "tuition_fees": 65000,
+      "program_level": "D",
+      "course_title": "Music"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Toronto",
+      "state": "Ontario",
+      "tuition_fees": 29000,
       "program_level": "B",
       "course_title": "Computer Science"
     }
@@ -192,31 +192,121 @@
   {
     "model": "university.university",
     "fields": {
-      "university_name": "University T",
-      "state": "State T",
-      "tuition_fees": 14500,
-      "program_level": "M",
-      "course_title": "Engineering"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University U",
-      "state": "State U",
-      "tuition_fees": 12000,
-      "program_level": "P",
-      "course_title": "Medicine"
-    }
-  },
-  {
-    "model": "university.university",
-    "fields": {
-      "university_name": "University V",
-      "state": "State V",
-      "tuition_fees": 11000,
+      "university_name": "Georgia Institute of Technology",
+      "state": "Georgia",
+      "tuition_fees": 42000,
       "program_level": "B",
-      "course_title": "Law"
+      "course_title": "Mechanical Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Illinois Urbana-Champaign",
+      "state": "Illinois",
+      "tuition_fees": 35000,
+      "program_level": "B",
+      "course_title": "Architecture"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Purdue University",
+      "state": "Indiana",
+      "tuition_fees": 30000,
+      "program_level": "B",
+      "course_title": "Aeronautical Engineering"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Pennsylvania",
+      "state": "Pennsylvania",
+      "tuition_fees": 65000,
+      "program_level": "M",
+      "course_title": "Finance"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Duke University",
+      "state": "North Carolina",
+      "tuition_fees": 63000,
+      "program_level": "M",
+      "course_title": "Public Policy"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Johns Hopkins University",
+      "state": "Maryland",
+      "tuition_fees": 65000,
+      "program_level": "P",
+      "course_title": "Biotechnology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of North Carolina at Chapel Hill",
+      "state": "North Carolina",
+      "tuition_fees": 23000,
+      "program_level": "B",
+      "course_title": "Political Science"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Indiana University Bloomington",
+      "state": "Indiana",
+      "tuition_fees": 30000,
+      "program_level": "B",
+      "course_title": "Philosophy"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Texas at Austin",
+      "state": "Texas",
+      "tuition_fees": 43000,
+      "program_level": "B",
+      "course_title": "Sociology"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "University of Miami",
+      "state": "Florida",
+      "tuition_fees": 51000,
+      "program_level": "B",
+      "course_title": "Journalism"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Vanderbilt University",
+      "state": "Tennessee",
+      "tuition_fees": 59000,
+      "program_level": "M",
+      "course_title": "Chemistry"
+    }
+  },
+  {
+    "model": "university.university",
+    "fields": {
+      "university_name": "Boston University",
+      "state": "Massachusetts",
+      "tuition_fees": 62000,
+      "program_level": "P",
+      "course_title": "Psychology"
     }
   }
 ]

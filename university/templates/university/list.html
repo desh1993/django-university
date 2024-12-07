@@ -154,11 +154,11 @@
 
     $(".js-range-slider").ionRangeSlider({
       type: "double",
-      min: 10000,
-      max: 50000,
-      from: 200,
-      to: 50000,
-      grid: true,
+      min: 0, // Start range at 0
+      max: 100000, // End range at 900,000
+      from: 0, // Position the first handle at the start
+      to: 100000, // Position the second handle at the end
+      grid: true, // Show a grid for better visualization
     });
   });
   function getCSRFToken() {
