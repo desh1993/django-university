@@ -1,7 +1,90 @@
-{% extends "base.html" %} {% block title %}Add University{% endblock %} {% block
-content %}
-<h1>Add a New University</h1>
-<form id="university-form" method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+{% extends "university/base.html" %} {% load static %} {% block title %} Create
+University {%endblock %} {%block content %}
+
+<div class="container mt-4">
+  <h1 class="mb-4">Add a New University</h1>
+  <!-- Spinner -->
+  <div class="spinner-overlay" id="spinner-overlay">
+    <div class="spinner-border" role="status"></div>
+  </div>
+
+  <form id="university-form">
+    <div class="mb-3">
+      <label for="university_name" class="form-label">University Name</label>
+      <input
+        type="text"
+        id="university_name"
+        name="university_name"
+        class="form-control"
+        placeholder="Enter university name"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="state" class="form-label">State</label>
+      <input
+        type="text"
+        id="state"
+        name="state"
+        class="form-control"
+        placeholder="Enter state"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="tuition_fees" class="form-label">Tuition Fees</label>
+      <input
+        type="number"
+        id="tuition_fees"
+        class="form-control"
+        placeholder="Enter tuition fees"
+        name="tuition_fees"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="program_level" class="form-label">Program Level</label>
+      <select
+        id="program_level"
+        name="program_level"
+        class="form-select"
+        required
+      >
+        <option value="" disabled>Choose level</option>
+        <option value="D">Diploma</option>
+        <option selected value="B">Bachelor's</option>
+        <option value="M">Master's</option>
+        <option value="P">Ph.D.</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="course_title" class="form-label">Course Title</label>
+      <input
+        type="text"
+        id="course_title"
+        name="course_title"
+        class="form-control"
+        placeholder="Enter course title"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submit-btn">
+      Submit
+    </button>
+  </form>
+</div>
+
+{% endblock %} {%block extra_js %}
+<!-- Include jQuery and the jQuery Validation Plugin -->
+
+<script
+  type="module"
+  src="{% static 'university/js/createUniversity.js' %}"
+></script>
+
+{% endblock %}

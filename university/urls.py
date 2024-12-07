@@ -7,6 +7,7 @@ from .views import (
     UniversityDeleteView,
     UniversityFilterView,
     UniversityDeleteApiView,
+    UniversityCreateApiView,
 )
 
 app_name = "university"
@@ -23,5 +24,8 @@ urlpatterns = [
         "api/universities/<int:pk>/",
         UniversityDeleteApiView.as_view(),
         name="delete_api",
+    ),
+    path(
+        "api/universities/create", UniversityCreateApiView.as_view(), name="create_api"
     ),
 ]
