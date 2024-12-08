@@ -52,6 +52,52 @@
               >
             </li>
           </ul>
+          <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle d-flex align-items-center"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="{% static 'university/images/avatar.jpg' %}"
+                  alt="Avatar"
+                  class="rounded-circle"
+                  style="width: 30px; height: 30px; margin-right: 10px"
+                />
+                Welcome, {{ user.username }}
+              </a>
+              <ul
+                class="bg-light dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdown"
+              >
+                <li class="nav-item dropdown">
+                  <form
+                    method="post"
+                    action="{% url 'logout' %}"
+                    class="dropdown-item p-0"
+                  >
+                    {% csrf_token %}
+                    <button
+                      type="submit"
+                      class="btn btn-link text-decoration-none p-0 text-dark"
+                    >
+                      Logout
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
         </div>
       </div>
     </nav>

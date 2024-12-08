@@ -1,3 +1,4 @@
+import axiosHeader from "./axios.js";
 import { apiUrl } from "./config.js";
 import { convertFormData } from "./utils.js";
 
@@ -14,7 +15,7 @@ async function submitEventHandler(form, event) {
   const formData = $(form).serializeArray();
   const data = convertFormData(formData);
   try {
-    const response = await axios.put(url, data);
+    const response = await axiosHeader.put(url, data);
     if (response && response.data) {
       const data = response.data;
       //SWAL.FIRE here

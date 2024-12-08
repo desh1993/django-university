@@ -24,9 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-r(0rv24_9!f7-ny7d5&c3)cn)0^&x8-^gbllul*$_kc40g6&4m"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "appdjangocrud.deshtest.com",  # Your custom domain
+    "University-Create-env.eba-fi23zp3j.us-east-1.elasticbeanstalk.com",  # Optional for internal access
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -140,3 +145,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Redirects unauthenticated users to the root login page

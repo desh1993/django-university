@@ -1,4 +1,5 @@
 import { apiUrl } from "./config.js";
+import axiosHeader from "./axios.js";
 import { convertFormData } from "./utils.js";
 
 const url = `${apiUrl}/create`;
@@ -14,7 +15,7 @@ async function submitEventHandler(form, event) {
   const formData = $(form).serializeArray();
   const data = convertFormData(formData);
   try {
-    const response = await axios.post(url, data);
+    const response = await axiosHeader.post(url, data);
     if (response && response.data) {
       const data = response.data;
       console.log(data);

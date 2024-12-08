@@ -15,11 +15,36 @@ from rest_framework import status
 from .serializers import UniversitySerializer, UniversityUpdateSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import DestroyAPIView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.permissions import IsAuthenticated
 
 
 def home(request):
     return HttpResponse("Welcome to the University App !")
+
+
+def user_login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to the /university/ URL after successful login
+            return redirect("/university/")
+        else:
+            messages.success(request, "Invalid username or password")
+            return redirect("home")
+    return render(request, "university/login.html")
+
+
+def user_logout(request):
+    logout(request)  # Logs out the user
+    return redirect("home")  # Redirects to the login page or home after logout
 
 
 # Create a custom pagination class
@@ -98,19 +123,25 @@ class UniversityFilterView(APIView):
         return Response(response_data)
 
 
+class CustomLoginRequiredMixin(LoginRequiredMixin):
+    def handle_no_permission(self):
+        # Redirect to the custom login URL without the next parameter
+        return redirect(self.login_url or "/")
+
+
 # Create your views here.
-class UniversityListView(ListView):
+class UniversityListView(CustomLoginRequiredMixin, ListView):
     model = University
     template_name = "university/list.html"
     context_object_name = "universities"
 
 
-class UniversityDetailView(DetailView):
+class UniversityDetailView(CustomLoginRequiredMixin, DetailView):
     model = University
     template_name = "university/detail.html"
 
 
-class UniversityCreateView(CreateView):
+class UniversityCreateView(CustomLoginRequiredMixin, CreateView):
     model = University
     template_name = "university/form.html"
     fields = [
@@ -123,6 +154,8 @@ class UniversityCreateView(CreateView):
 
 
 class UniversityCreateApiView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         serializer = UniversitySerializer(data=request.data)
         if serializer.is_valid():
