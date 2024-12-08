@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import requests
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,13 +28,31 @@ SECRET_KEY = "django-insecure-r(0rv24_9!f7-ny7d5&c3)cn)0^&x8-^gbllul*$_kc40g6&4m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+try:
+    # Fetch IMDSv2 token and retrieve private IP from EC2 metadata
+    IMDSv2_TOKEN = requests.put(
+        "http://169.254.169.254/latest/api/token",
+        headers={"X-aws-ec2-metadata-token-ttl-seconds": "3600"},
+    ).text
+    EC2_PRIVATE_IP = requests.get(
+        "http://169.254.169.254/latest/meta-data/local-ipv4",
+        timeout=0.01,
+        headers={"X-aws-ec2-metadata-token": IMDSv2_TOKEN},
+    ).text
+except requests.exceptions.RequestException:
+    # If metadata fetch fails, set private IP to None
+    EC2_PRIVATE_IP = None
+
 ALLOWED_HOSTS = [
     "appdjangocrud.deshtest.com",  # Your custom domain
     "University-Create-env.eba-fi23zp3j.us-east-1.elasticbeanstalk.com",  # Optional for internal access
-    "localhost",
-    "127.0.0.1",
+    "localhost",  # For local development
+    "127.0.0.1",  # For local development (IPv4)
 ]
 
+# Add EC2 private IP dynamically to ALLOWED_HOSTS if available
+if EC2_PRIVATE_IP:
+    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
 
 # Application definition
 
@@ -46,7 +66,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "ebhealthcheck.apps.EBHealthCheckConfig",
 ]
 
 MIDDLEWARE = [

@@ -26,4 +26,5 @@ urlpatterns = [
     path("", views.user_login, name="home"),
     path("logout/", views.user_logout, name="logout"),
     path("health/", views.health_check, name="health_check"),
+    path("health_check/", include("health_check.urls")),  # Include health check URL
 ]
