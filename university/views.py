@@ -21,6 +21,11 @@ from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
+
+
+def health_check(request):
+    return JsonResponse({"status": "ok"}, status=200)
 
 
 def home(request):
