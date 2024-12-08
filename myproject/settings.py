@@ -8,6 +8,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
+
+Possible EB solution: https://stackoverflow.com/questions/32920688/how-to-setup-health-check-page-in-django
 """
 
 from pathlib import Path
@@ -46,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "ebhealthcheck.apps.EBHealthCheckConfig",
+    "health_check",
 ]
 
 MIDDLEWARE = [
