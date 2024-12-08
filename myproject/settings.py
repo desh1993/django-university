@@ -29,8 +29,6 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "appdjangocrud.deshtest.com",  # Your custom domain
     "University-Create-env.eba-fi23zp3j.us-east-1.elasticbeanstalk.com",  # Optional for internal access
-    "localhost",
-    "127.0.0.1",
 ]
 
 
