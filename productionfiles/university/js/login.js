@@ -12,26 +12,26 @@ async function submitEventHandler(form, event) {
   form.classList.add("form-disabled");
   const formData = $(form).serializeArray();
   const data = convertFormData(formData);
-  try {
-    const response = await axios.post(url, data);
-    if (response.data.status === "success") {
-      window.location.href = "/university";
-    }
-  } catch (error) {
-    if (error.response && error.response.data) {
-      console.log(error.response.data);
-      Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: error.response.data.error || "Invalid credentials",
-        timer: 1500, // Auto close after 1.5 seconds
-      });
-    }
-  } finally {
-    // Hide spinner and re-enable form
-    spinnerOverlay.classList.remove("active");
-    form.classList.remove("form-disabled");
-  }
+  // try {
+  //   const response = await axios.post(url, data);
+  //   if (response.data.status === "success") {
+  //     window.location.href = "/university";
+  //   }
+  // } catch (error) {
+  //   if (error.response && error.response.data) {
+  //     console.log(error.response.data);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error!",
+  //       text: error.response.data.error || "Invalid credentials",
+  //       timer: 1500, // Auto close after 1.5 seconds
+  //     });
+  //   }
+  // } finally {
+  //   // Hide spinner and re-enable form
+  //   spinnerOverlay.classList.remove("active");
+  //   form.classList.remove("form-disabled");
+  // }
 }
 
 $(document).ready(function () {
@@ -73,5 +73,9 @@ $(document).ready(function () {
       }
     },
     // submitHandler: submitEventHandler,
+  });
+  $("#login-form").submit(function () {
+    spinnerOverlay.classList.add("active");
+    form.classList.add("form-disabled");
   });
 });
