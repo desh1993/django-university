@@ -37,8 +37,7 @@ University {%endblock %} {%block content %}
         id="state"
         name="state"
         class="form-control"
-        placeholder="Enter state"
-        
+        placeholder="Enter the full state name (e.g., Subang Jaya)"
         value="{{object.state}}"
       />
     </div>
@@ -85,7 +84,7 @@ University {%endblock %} {%block content %}
       />
     </div>
 
-    <button type="submit" class="btn btn-success" id="submit-btn">
+    <button type="submit" class="btn btn-success update-btn" id="submit-btn">
       Update
     </button>
   </form>
